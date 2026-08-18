@@ -35,14 +35,14 @@ export const ScrollToTopButton: React.FC<ScrollToTopButtonProps> = ({
   };
 
   // Dynamically sit above the radar in all three of its states:
-  //  • dismissed (small pill at bottom-5, ~40px tall)  → bottom-24  (96px)
-  //  • collapsed  (card at bottom-4, ~118px tall)       → bottom-36  (144px)
-  //  • expanded   (card at bottom-4, ~220px+ tall)      → bottom-64  (256px)
+  //  • dismissed (small pill at bottom-5, ~40px tall)   → bottom-20  (80px)  — snug above pill
+  //  • collapsed  (card at bottom-4, ~140px tall)        → bottom-40  (160px) — 20px clearance
+  //  • expanded   (card at bottom-4, ~270px+ tall)       → bottom-72  (288px) — 18px clearance
   const bottomClass = radarIsDismissed
-    ? 'bottom-24'
+    ? 'bottom-20'
     : radarIsExpanded
-    ? 'bottom-64'
-    : 'bottom-36';
+    ? 'bottom-72'
+    : 'bottom-40';
 
   return (
     <AnimatePresence>
