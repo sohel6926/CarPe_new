@@ -20,6 +20,8 @@ import { PageId } from '../types';
 
 interface LiveHighwayRadarBarProps {
   onNavigate: (page: PageId, anchorId?: string) => void;
+  onDismissedChange: (val: boolean) => void;
+  onExpandedChange: (val: boolean) => void;
 }
 
 interface CorridorUpdate {
@@ -86,11 +88,21 @@ const LIVE_UPDATES: CorridorUpdate[] = [
   }
 ];
 
-export const LiveHighwayRadarBar: React.FC<LiveHighwayRadarBarProps> = ({ onNavigate }) => {
+export const LiveHighwayRadarBar: React.FC<LiveHighwayRadarBarProps> = ({ onNavigate, onDismissedChange, onExpandedChange }) => {
   const [currentIdx, setCurrentIdx] = useState(0);
   const [isExpanded, setIsExpanded] = useState(false);
   const [activeCarCount, setActiveCarCount] = useState(148);
   const [isDismissed, setIsDismissed] = useState(false);
+
+  const handleSetDismissed = (val: boolean) => {
+    setIsDismissed(val);
+    onDismissedChange(val);
+  };
+
+  const handleSetExpanded = (val: boolean) => {
+    setIsExpanded(val);
+    onExpandedChange(val);
+  };
 
   // Cycle through updates at a comfortable readable interval
   useEffect(() => {
@@ -116,7 +128,7 @@ export const LiveHighwayRadarBar: React.FC<LiveHighwayRadarBarProps> = ({ onNavi
       <motion.button
         initial={{ scale: 0.8, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
-        onClick={() => setIsDismissed(false)}
+        onClick={() => handleSetDismissed(false)}
         className="fixed bottom-5 right-5 z-40 bg-[#5B16A6] text-white p-3 rounded-full shadow-lg shadow-purple-950/20 hover:bg-[#4A1089] transition-all flex items-center gap-2 text-xs font-bold cursor-pointer"
         title="Open Live Highway Radar"
       >
@@ -160,7 +172,7 @@ export const LiveHighwayRadarBar: React.FC<LiveHighwayRadarBarProps> = ({ onNavi
 
           <div className="flex items-center gap-1">
             <button
-              onClick={() => setIsExpanded(!isExpanded)}
+              onClick={() => handleSetExpanded(!isExpanded)}
               className="p-1 text-white/70 hover:text-white rounded-lg hover:bg-white/10 transition-colors cursor-pointer text-xs flex items-center gap-0.5"
               title={isExpanded ? "Collapse telemetry" : "Expand telemetry"}
             >
@@ -170,7 +182,7 @@ export const LiveHighwayRadarBar: React.FC<LiveHighwayRadarBarProps> = ({ onNavi
               {isExpanded ? <ChevronDown className="w-3.5 h-3.5" /> : <ChevronUp className="w-3.5 h-3.5" />}
             </button>
             <button
-              onClick={() => setIsDismissed(true)}
+              onClick={() => handleSetDismissed(true)}
               className="p-1 text-white/50 hover:text-white rounded-lg hover:bg-white/10 transition-colors cursor-pointer"
               title="Minimize bar"
             >
@@ -242,7 +254,7 @@ export const LiveHighwayRadarBar: React.FC<LiveHighwayRadarBarProps> = ({ onNavi
                   <button
                     onClick={() => {
                       onNavigate('services', 'route-matching');
-                      setIsExpanded(false);
+                      handleSetExpanded(false);
                     }}
                     className="w-full py-2 bg-[#5B16A6] hover:bg-[#4A1089] text-white text-xs font-bold rounded-xl flex items-center justify-center gap-1 transition-colors cursor-pointer"
                   >
@@ -252,7 +264,7 @@ export const LiveHighwayRadarBar: React.FC<LiveHighwayRadarBarProps> = ({ onNavi
                   <button
                     onClick={() => {
                       onNavigate('home');
-                      setIsExpanded(false);
+                      handleSetExpanded(false);
                       // scroll to estimator
                       setTimeout(() => {
                         const el = document.getElementById('fare-estimator-section');

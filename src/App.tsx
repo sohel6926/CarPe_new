@@ -16,6 +16,8 @@ import { ScrollToTopButton } from './components/ScrollToTopButton';
 export default function App() {
   const [currentPage, setCurrentPage] = useState<PageId>('home');
   const [targetAnchorId, setTargetAnchorId] = useState<string | undefined>(undefined);
+  const [radarIsDismissed, setRadarIsDismissed] = useState(false);
+  const [radarIsExpanded, setRadarIsExpanded] = useState(false);
 
   // Sync hash routing on mount and hashchange
   useEffect(() => {
@@ -83,8 +85,15 @@ export default function App() {
       </main>
 
       {/* Interactive Global Animation Widgets */}
-      <LiveHighwayRadarBar onNavigate={handleNavigate} />
-      <ScrollToTopButton />
+      <LiveHighwayRadarBar
+        onNavigate={handleNavigate}
+        onDismissedChange={setRadarIsDismissed}
+        onExpandedChange={setRadarIsExpanded}
+      />
+      <ScrollToTopButton
+        radarIsDismissed={radarIsDismissed}
+        radarIsExpanded={radarIsExpanded}
+      />
 
       {/* Global Footer */}
       <Footer onNavigate={handleNavigate} />
