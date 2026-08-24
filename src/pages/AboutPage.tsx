@@ -25,7 +25,8 @@ import {
   Download,
   Building,
   Award,
-  Globe
+  Globe,
+  MapPin
 } from 'lucide-react';
 
 interface AboutPageProps {
@@ -46,6 +47,8 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
     Users,
     Route,
     Clock,
+    Sparkles,
+    MapPin,
   };
 
   return (
@@ -190,7 +193,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
         >
           <div className="inline-flex items-center gap-1.5 bg-[#E8FBF3] text-[#00B936] text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">
             <ShieldCheck className="w-3.5 h-3.5" />
-            <span>The 13 Pillars of Trust</span>
+            <span>The 14 Pillars of Trust</span>
           </div>
           <h2 className="text-3xl sm:text-4xl font-extrabold text-gray-900 font-display">
             Our Core Architectural Principles

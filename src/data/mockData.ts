@@ -180,6 +180,20 @@ export const CORE_PRINCIPLES: CorePrinciple[] = [
     desc: 'Real-time traffic-synced arrival and departure estimates, combined with a clear 40-minute highway pickup window.',
     icon: 'Clock',
     benefit: 'Accurate scheduling with zero ambiguity on pickup windows.'
+  },
+  {
+    id: 'polished-journey',
+    title: 'Polished Journey',
+    desc: 'Passengers use headphones for phone calls and media playback to maintain a calm shared environment. All rides include active air conditioning as part of the algorithmic fuel calculation.',
+    icon: 'Sparkles',
+    benefit: 'Passengers enjoy a consistently premium travel experience with no compromise on comfort or etiquette.'
+  },
+  {
+    id: 'flexible-pickup',
+    title: 'Flexible Pickup',
+    desc: 'To account for city exit traffic, a 4:00 PM ride allows arrival between 4:00 PM and 4:40 PM.',
+    icon: 'MapPin',
+    benefit: 'Reduces travel time and hassle by meeting riders where they are rather than forcing a single fixed pickup spot.'
   }
 ];
 
